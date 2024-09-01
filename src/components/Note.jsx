@@ -1,11 +1,5 @@
-import React from "react";
-
-function Note({ note }) {
-  return (
-    <>
-      <li>{note.content}</li>
-    </>
-  );
-}
+const Note = ({ note }) => {
+  return <li>{note.content}</li>;
+};
 
 export default Note;

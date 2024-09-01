@@ -1,49 +1,56 @@
-import Course from "./components/Course";
+import { useState } from "react";
 
 const App = () => {
-  const courses = [
-    {
-      id: 1,
-      name: "Half Stack application development",
-      parts: [
-        {
-          name: "Fundamentals of React",
-          exercises: 10,
-          id: 1,
-        },
-        {
-          name: "Using props to pass data",
-          exercises: 7,
-          id: 2,
-        },
-        {
-          name: "State of a component",
-          exercises: 14,
-          id: 3,
-        },
-        { name: "Redux", exercises: 11, id: 4 },
-      ],
-    },
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas", number: 5467 },
+  ]);
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
-    {
-      name: "Node.js",
-      id: 2,
-      parts: [
-        {
-          name: "Routing",
-          exercises: 3,
-          id: 1,
-        },
-        {
-          name: "Middlewares",
-          exercises: 7,
-          id: 2,
-        },
-      ],
-    },
-  ];
+  const addContact = (event) => {
+    event.preventDefault();
+    const personObject = { name: newName, number: newNumber };
+    persons.some((person) => person.name === personObject.name)
+      ? alert(`${newName} already exists in phonebooks`)
+      : setPersons([...persons, personObject]);
+    setNewName("");
+    setNewNumber("");
+  };
 
-  return courses.map((course) => <Course key={course.id} course={course} />);
+  const handleNameChange = (event) => {
+    console.log(event.target.value);
+    setNewName(event.target.value);
+  };
+  const handleNumberChange = (event) => {
+    console.log(event.target.value);
+    setNewNumber(event.target.value);
+  };
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+
+      <form onSubmit={addContact}>
+        <div>
+          name: <input value={newName} onChange={handleNameChange} />
+        </div>
+        <div>
+          number: <input value={newNumber} onChange={handleNumberChange} />
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+      <div>
+        {persons.map((person) => (
+          <p key={person.name}>
+            {person.name} {person.number}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default App;
