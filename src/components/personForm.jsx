@@ -13,10 +13,22 @@ function PersonForm({
     <>
       <form onSubmit={addContact}>
         <div>
-          name: <input value={newName} onChange={handleNameChange} />
+          name:{" "}
+          <input
+            name="name"
+            autoComplete="off"
+            value={newName}
+            onChange={handleNameChange}
+          />
         </div>
         <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
+          number:{" "}
+          <input
+            name="number"
+            autoComplete="off"
+            value={newNumber}
+            onChange={handleNumberChange}
+          />
         </div>
         <div>
           <button type="submit" value="submit">
